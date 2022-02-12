@@ -1,0 +1,46 @@
+<div class="login-background" fxLayout="row" fxLayoutAlign="center center">
+  <mat-card class="login-content" fxLayout="column" fxLayoutAlign="start center">
+    <div class="login-header">
+      <img src="assets/images/CS_Logo_Claim_RGB_plz_replace.png" alt="CSEye">
+    </div>
+    <div class="login-form">
+      <form [formGroup]="loginFormData" novalidate (submit)="login($event)" (keydown.enter)="login($event)" >
+        <div class="login-field">
+          <mat-form-field class="login-field">
+            <input matInput formControlName="username" placeholder="Enter your username" type="text"
+              [errorStateMatcher]="parentErrorStateMatcher" required>
+            <button mat-button *ngIf="!loginFormData.get('username')?.hasError('required')" matSuffix mat-icon-button
+              aria-label="Clear" tabindex="-1" (click)="clearField('username'); clearField('password');">
+              <mat-icon>close</mat-icon>
+            </button>
+            <mat-error *ngIf="loginFormData.get('username')?.hasError('required')">The username is
+              <strong>required</strong>. </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="login-field">
+          <mat-form-field class="login-field">
+            <input matInput formControlName="password" placeholder="Enter your password"
+              [type]="hidePassword ? 'password' : 'text'" [errorStateMatcher]="parentErrorStateMatcher" required>
+            <button mat-button *ngIf="!loginFormData.get('password')?.hasError('required')" matSuffix mat-icon-button
+              aria-label="Clear" (click)="clearField('password');">
+              <mat-icon>close</mat-icon>
+            </button>
+            <mat-error *ngIf="loginFormData.get('password')?.hasError('required')">The password is
+              <strong>required</strong>. </mat-error>
+            <mat-error *ngIf="loginFormData?.hasError('error')">{{loginFormData?.errors?.["error"]}}</mat-error>
+          </mat-form-field>
+        </div>
+
+        <button mat-raised-button (click)="login($event)" color="primary" style="margin-bottom:20px" >
+          Login
+        </button>
+        <br>
+        <hr>
+        <div class="browser-option">
+            <span>Chrome is preferred</span>
+        </div>
+      </form>
+    </div>
+  </mat-card>
+</div>

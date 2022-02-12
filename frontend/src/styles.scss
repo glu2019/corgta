@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans:400,700');
+@import '~@angular/material/theming';
+$custom-typography: mat-typography-config(
+  $font-family: 'Noto Sans'
+);
+@include mat-core($custom-typography);
+
+$custom-primary: (
+  50 : #f9e2e2,
+  100 : #efb6b7,
+  200 : #e58587,
+  300 : #da5457,
+  400 : #d23033,
+  500 : #ca0b0f,
+  600 : #c50a0d,
+  700 : #bd080b,
+  800 : #b70608,
+  900 : #ab0304,
+  A100 : #ffd4d4,
+  A200 : #ffa1a1,
+  A400 : #ff6e6e,
+  A700 : #ff5555,
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #ffffff,
+    400 : #ffffff,
+    500 : #ffffff,
+    600 : #ffffff,
+    700 : #ffffff,
+    800 : #ffffff,
+    900 : #ffffff,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #000000,
+    A700 : #000000,
+)
+);
+$custom-accent: (
+  50 : #fcebe1,
+  100 : #f9ceb4,
+  200 : #f5ad83,
+  300 : #f08c51,
+  400 : #ed732b,
+  500 : #ea5a06,
+  600 : #e75205,
+  700 : #e44804,
+  800 : #e13f03,
+  900 : #db2e02,
+  A100 : #ffffff,
+  A200 : #ffd6cf,
+  A400 : #ffab9c,
+  A700 : #ff9583,
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #000000,
+    400 : #000000,
+    500 : #ffffff,
+    600 : #ffffff,
+    700 : #ffffff,
+    800 : #ffffff,
+    900 : #ffffff,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #000000,
+    A700 : #000000,
+)
+);
+$custom-warn: (
+  50 : #fff8e0,
+  100 : #feedb3,
+  200 : #fee180,
+  300 : #fed54d,
+  400 : #fdcc26,
+  500 : #fdc300,
+  600 : #fdbd00,
+  700 : #fcb500,
+  800 : #fcae00,
+  900 : #fca100,
+  A100 : #ffffff,
+  A200 : #fff8ef,
+  A400 : #ffe4bc,
+  A700 : #ffd9a2,
+  contrast: (
+      50 : #000000,
+      100 : #000000,
+      200 : #000000,
+      300 : #000000,
+      400 : #000000,
+      500 : #000000,
+      600 : #000000,
+      700 : #000000,
+      800 : #000000,
+      900 : #000000,
+      A100 : #000000,
+      A200 : #000000,
+      A400 : #000000,
+      A700 : #000000,
+  )
+);
+
+$primary: mat-palette($custom-primary, 500, 300, 700);
+$accent: mat-palette($custom-accent, 500, 300, 700);
+$warn: mat-palette($custom-warn, 500, 300, 700);
+$theme: mat-light-theme($primary, $accent, $warn);
+$background: map-get($theme, background);
+$foreground: map-get($theme, foreground);
+@include angular-material-theme($theme);

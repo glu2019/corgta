@@ -1,0 +1,84 @@
+.login-background {
+  width: 100%;
+  height: 100%;
+  background-image: url("/assets/images/YamaguchiShinMInev5GG.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  z-index: 1;
+  align-items: center;
+  display: flex;
+  place-content: center;
+}
+
+.login-content {
+  background-color: #fff;
+  min-width: 400px;
+  min-height: 350px;
+  vertical-align: middle;
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 15px !important;
+}
+
+.login-header {
+  align-items: center;
+  text-align: center;
+  img {
+    width: 350px;
+  }
+}
+
+.login-form {
+  width: 100%;
+}
+
+.login-field {
+  width: 100%;
+  margin: 5px 0;
+  background-color: rgba(255, 255, 255, 0);
+}
+
+.login-footer {
+  display: flex;
+  place-content: center space-between;
+  font-size: 14px;
+  color: #4183c4;
+}
+
+.browser-option{
+  text-align: center;
+  font-size: 12px;
+}
+.mat-raised-button {
+  width: 100%;
+  margin-bottom: 20px;
+  margin-top: 10px;
+  font-size: 18px;
+}
+
+.mat-error {
+  color: red;
+}
+
+// For small devices
+@media (max-width: 414px) {
+  .login-content {
+    background-color: #fff;
+    opacity: 0.9;
+    max-width: 100vw;
+    max-height: 100vh;
+    min-width: 70vw;
+    vertical-align: middle;
+    border-radius: 5px;
+  }
+  .login-header {
+    img {
+      width: 200px;
+    }
+  }
+  .mat-raised-button {
+    font-size: 15px;
+  }
+}
