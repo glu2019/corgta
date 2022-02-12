@@ -9,11 +9,11 @@ export class AuthService {
     public isAuthenticated() {
         let isAuthenticated = false
         
-        // if (this.cookieService.get('token') && this.decodeToken(this.cookieService.get('token')).exp * 1000 >
-        // Date.now()) {
+        if (this.cookieService.get('token') && this.decodeToken(this.cookieService.get('token')).exp * 1000 >
+        Date.now()) {
             
             isAuthenticated = true
-        // }
+        }
         return isAuthenticated;
     }
 
