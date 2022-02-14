@@ -11,11 +11,14 @@ This repository is to develop Corgta web application.
 
 ## Run the dev environment with Docker.
 
-1. Run the docker image via the docker-compose.
+2. Run the docker image via the docker-compose.
    ```bash
    docker-compose up --build
    ```
-   In the docker container, the frontend run at port: 4200 while backend run at port: 8000
-   You can run frontend and backend mannually but have to configure the whitelist and other small configurations to make it work.
-   Using docker here is the the easiest way to run frontend and backend together as the docker containers prepair the environments for both frontend and backend.
-2. Open browser http://localhost. Need to wait for the server is ready.
+   In the docker container, the frontend run at port: 4200 while the backend run at port: 8000
+
+3. Open browser http://localhost. Need to wait for the server is ready.
+
+4. username: guang2022, password: 123456
+
+5. Please also find the server: http://72.15.139.146/ for deployment. 
