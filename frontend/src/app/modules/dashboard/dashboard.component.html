@@ -1,1 +1,183 @@
-<p>dashboard works!asdfasfdasfasfdafsdafdadfsasdf</p>
+<div>
+    <button class="create-club" nz-button nzType="primary" (click)="showCreateModal()">
+        <i nz-icon nzType="plus" nzTheme="outline"></i>
+        Create
+    </button>
+    <nz-table #nestedTable [nzData]="clubs" [nzShowPagination]="false">
+        <thead>
+          <tr>
+            <th nzWidth="100px">Clubs</th>
+            <th>Club Name</th>
+            <th>Club Address</th>
+            <th nzWidth="100px"></th>
+          </tr>
+        </thead>
+        <tbody cdkDropList (cdkDropListDropped)="drop($event)">
+          <ng-template ngFor let-data [ngForOf]="clubs" let-i="index">
+            <tr cdkDrag>
+              <td [(nzExpand)]="data.expand"></td>
+              <td>{{ data.club_name }}</td>
+              <td>{{ data.club_address }}</td>
+              <td>
+                <i nz-icon nzType="edit" nzTheme="outline" (click)="showEditModal('club', data, i)"></i>
+              </td>
+            </tr>
+            <tr [nzExpand]="data.expand">
+              <nz-table #innerTable [nzData]="clubs[i].club_members" nzSize="middle" [nzShowPagination]="false">
+                <thead>
+                  <tr>
+                    <th>Club Members</th>
+                    <th>Age</th>
+                    <th nzWidth="100px"></th>
+                  </tr>
+                </thead>
+                <tbody cdkDropList (cdkDropListDropped)="dropInner(i,$event)">
+                  <tr *ngFor="let member of clubs[i].club_members; let memberIndex = index" cdkDrag>
+                    <td>{{ member.name }}</td>
+                    <td>{{ member.age }}</td>
+                    <td>
+                        <i nz-icon nzType="edit" nzTheme="outline" (click)="showEditModal('member', member, i, memberIndex)"></i>
+                    </td>
+                  </tr>
+                </tbody>
+              </nz-table>
+            </tr>
+          </ng-template>
+        </tbody>
+      </nz-table>
+      <nz-modal
+        [(nzVisible)]="isVisible"
+        [nzTitle]="modalTitle"
+        nzCentered
+        [nzContent]="modalContent"
+        [nzFooter]="modalFooter"
+        (nzOnCancel)="handleCancel()"
+        >
+      <ng-template #modalTitle>{{selected.type === 'club' ? 'Edit Club' : 'Edit Member'}}</ng-template>
+
+      <ng-template #modalContent >
+        <form
+            nz-form
+            [nzLayout]="'vertical'"
+            [formGroup]="editForm"
+        >
+          <div nz-row [nzGutter]="16">
+            <div nz-col class="gutter-row" [nzXs]="24" [nzSm]="12" >
+                <nz-form-item>
+                <nz-form-label>Name</nz-form-label>
+                <nz-form-control nzErrorTip="Club name is required!">
+                    <input nz-input formControlName="name" placeholder="Club name" />
+                </nz-form-control>
+                </nz-form-item>
+            </div>
+            <div nz-col class="gutter-row" [nzXs]="24" [nzSm]="12" >
+                <nz-form-item *ngIf="selected.type === 'club'">
+                <nz-form-label>Address</nz-form-label>
+                <nz-form-control [nzErrorTip]="editForm.value.address ? 'Min length 3.' :'Club address is required!'">
+                    <input nz-input formControlName="address" placeholder="Club address" />
+                </nz-form-control>
+                </nz-form-item>
+                <nz-form-item *ngIf="selected.type === 'member'">
+                    <nz-form-label>Age</nz-form-label>
+                    <nz-form-control nzErrorTip="Invalid age!">
+                        <input nz-input formControlName="age" type="number" placeholder="Age" />
+                    </nz-form-control>
+                    </nz-form-item>
+            </div>
+          </div>
+          <nz-alert *ngIf="error" nzType="error" [nzMessage]="error" nzShowIcon></nz-alert>
+        </form>
+      </ng-template>
+
+      <ng-template #modalFooter>
+        <button nz-button nzType="default" (click)="handleCancel()">Cancel</button>
+        <button nz-button nzType="primary" (click)="update()" [nzLoading]="isLoading">Update</button>
+      </ng-template>
+    </nz-modal>
+
+    <nz-modal
+        [(nzVisible)]="isCreate"
+        [nzTitle]="modalCreateTitle"
+        nzCentered
+        [nzContent]="modalCreateContent"
+        [nzFooter]="modalCreateFooter"
+        (nzOnCancel)="handleCancel()"
+        >
+      <ng-template #modalCreateTitle>Create Club</ng-template>
+
+      <ng-template #modalCreateContent >
+        <form
+            nz-form
+            [nzLayout]="'vertical'"
+            [formGroup]="createForm"
+        >
+        <div nz-row [nzGutter]="16">
+            <div nz-col class="gutter-row" [nzXs]="24" [nzSm]="12" >
+                <nz-form-item>
+                <nz-form-label>Name</nz-form-label>
+                <nz-form-control nzErrorTip="Club name is required!">
+                    <input nz-input formControlName="club_name" placeholder="Club name" />
+                </nz-form-control>
+                </nz-form-item>
+            </div>
+            <div nz-col class="gutter-row" [nzXs]="24" [nzSm]="12" >
+                <nz-form-item>
+                <nz-form-label>Address</nz-form-label>
+                <nz-form-control [nzErrorTip]="createForm.value.club_address ? 'Min length 3.' :'Club address is required!'">
+                    <input nz-input formControlName="club_address" placeholder="Club address" />
+                </nz-form-control>
+                </nz-form-item>
+            </div>
+          </div>
+        </form>
+        <nz-form-label>Club members</nz-form-label>
+        <form nz-form [nzLayout]="'inline'" [formGroup]="createMemberForm" (ngSubmit)="createMember()">
+            <nz-form-item>
+              <nz-form-control nzErrorTip="Name is required!">
+                <nz-input-group>
+                  <input formControlName="name" nz-input placeholder="Member name" />
+                </nz-input-group>
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-control nzErrorTip="Age is required!">
+                <nz-input-group>
+                  <input formControlName="age" type="number" nz-input placeholder="Member age" />
+                </nz-input-group>
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-control>
+                <button nz-button nzType="primary" nzShape="round">
+                    <i nz-icon nzType="plus" nzTheme="outline"></i>
+                </button>
+              </nz-form-control>
+            </nz-form-item>
+          </form>
+          <nz-table class="member-table" *ngIf="members.length>0" #basicTable [nzData]="members" nzSize="middle" [nzShowPagination]="false">
+            <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Age</th>
+                  <th nzWidth="100px"></th>
+                </tr>
+              </thead>
+            <tbody>
+              <tr *ngFor="let member of members; let i = index">
+                <td>{{ member.name }}</td>
+                <td>{{ member.age }}</td>
+                <td>
+                    <i nz-icon nzType="delete" nzTheme="outline" (click)="deleteMember(i)" ></i>
+                </td>
+              </tr>
+            </tbody>
+          </nz-table>
+          <nz-alert *ngIf="error" nzType="error" [nzMessage]="error" nzShowIcon></nz-alert>
+      </ng-template>
+
+      <ng-template #modalCreateFooter>
+        <button nz-button nzType="default" (click)="handleCancel()">Cancel</button>
+        <button nz-button nzType="primary" (click)="createClub()" [nzLoading]="isLoading">Create</button>
+      </ng-template>
+    </nz-modal>
+</div>

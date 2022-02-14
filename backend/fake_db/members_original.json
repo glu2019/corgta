@@ -1,0 +1,34 @@
+{
+    "members": [
+        {
+            "id": 1,
+            "name": "Peter",
+            "age": 30,
+            "club_id": 1
+        },
+        {
+            "id": 2,
+            "name": "David",
+            "age": 30,
+            "club_id": 1
+        },
+        {
+            "id": 3,
+            "name": "Mike",
+            "age": 35,
+            "club_id": 2
+        },
+        {
+            "id": 4,
+            "name": "Lucas",
+            "age": 32,
+            "club_id": 2
+        },
+        {
+            "id": 5,
+            "name": "Fann",
+            "age": 39,
+            "club_id": 2
+        }
+    ]
+}

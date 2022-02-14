@@ -12,25 +12,15 @@
         </a>
       </div>
       <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-        <li nz-submenu nzOpen nzTitle="Dashboard" nzIcon="dashboard">
-          <ul>
-            <li nz-menu-item nzMatchRouter>
-              <a routerLink="/welcome">Welcome</a>
-            </li>
-            <li nz-menu-item nzMatchRouter>
-              <a>Monitor</a>
-            </li>
-            <li nz-menu-item nzMatchRouter>
-              <a>Workplace</a>
-            </li>
-          </ul>
-        </li>
-        <li nz-submenu nzOpen nzTitle="Form" nzIcon="form">
-          <ul>
-            <li nz-menu-item nzMatchRouter>
-              <a>Basic Form</a>
-            </li>
-          </ul>
+        <li
+          nz-menu-item
+          nz-tooltip
+          nzTooltipPlacement="right"
+          [nzTooltipTitle]="isCollapsed ? 'Dashboard' : ''"
+          nzSelected
+        >
+          <i nz-icon nzType="dashboard"></i>
+          <span>Dashboard</span>
         </li>
       </ul>
     </nz-sider>
@@ -42,6 +32,16 @@
                  nz-icon
                  [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
               ></i>
+          </span>
+          <span class="header-right">
+            <i 
+              nz-icon 
+              nzType="logout" 
+              nzTheme="outline" 
+              (click)="logout()" 
+              nz-tooltip 
+              nzTooltipTitle="Logout">
+            </i>
           </span>
         </div>
       </nz-header>

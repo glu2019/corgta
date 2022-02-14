@@ -1,0 +1,10 @@
+version: "3"
+services:
+  frontend:
+    build: .
+    image: frontend:level-4
+    volumes:
+      - .:/usr/local/corgta/frontend
+      - /usr/local/corgta/frontend/node_modules
+    ports:
+      - 4200:4200

@@ -1,0 +1,25 @@
+version: "3"
+services:
+  backend:
+    build: backend
+    volumes:
+      - ./backend:/usr/local/corgta/backend/
+    ports:
+      - 8000:8000
+  frontend:
+    build: frontend
+    volumes:
+      - ./frontend/:/usr/local/corgta/frontend/
+      - /usr/local/corgta/frontend/node_modules/
+    ports:
+      - 4200:4200
+    depends_on:
+      - backend
+  nginx:
+    image: nginx:1.15
+    volumes:
+      - ./config/corgta-nginx.conf:/etc/nginx/conf.d/corgta-nginx.conf
+    ports:
+      - 80:8080
+    depends_on:
+      - frontend

@@ -1,0 +1,9 @@
+version: "3"
+services:
+  backend:
+    build: .
+    image: backend:level-4
+    volumes:
+      - .:/usr/local/corgta/backend
+    ports:
+      - 8000:8000

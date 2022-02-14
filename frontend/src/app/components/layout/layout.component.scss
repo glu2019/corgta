@@ -1,14 +1,3 @@
-:host {
-    display: flex;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-  
-  .app-layout {
-    height: 100vh;
-  }
-  
   .menu-sidebar {
     position: relative;
     z-index: 10;
@@ -79,3 +68,13 @@
     height: 100%;
   }
   
+  .header-right{
+    float: right;
+    margin-right: 30px;
+    font-size: 18px;
+    i:hover,
+    i:active,
+    i:focus {
+      color: #1890ff
+    }
+  }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import snakecaseKeys from 'snakecase-keys';
 import {
   FormBuilder,
@@ -53,20 +53,21 @@ export class LoginComponent implements OnInit {
     this.loginFormData.get(formControlName)?.reset();
   }
 
-  login(event:any) {
+  login(event: any) {
     event.preventDefault()
+    let postData = Object.keys(snakecaseKeys(this.loginFormData.value)).map(key => key + '=' + snakecaseKeys(this.loginFormData.value)[key]).join('&')
+    let postHeader = { headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' }) }
     this.http.post(
-      location.origin + '/cseye-rest/auth/',
-      snakecaseKeys(this.loginFormData.value)
-    )
-      .subscribe(
-        data => {
-          this.router.navigate(['/'])
-        },
-        err => {
-          this.loginFormData.setErrors(err.error);
-        }
-      );
-    
+      location.origin + '/api/login/',
+      postData,
+      postHeader
+    ).subscribe(
+      data => {
+        this.router.navigate(['/'])
+      },
+      err => {
+        this.loginFormData.setErrors(err.error);
+      }
+    );
   }
 }

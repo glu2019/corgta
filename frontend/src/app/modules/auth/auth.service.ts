@@ -8,8 +8,9 @@ export class AuthService {
 
     public isAuthenticated() {
         let isAuthenticated = false
-        
-        if (this.cookieService.get('token') && this.decodeToken(this.cookieService.get('token')).exp * 1000 >
+        let access_token = this.cookieService.get('access_token').split(" ")[1]?.slice(0, -1)
+        console.log(access_token)
+        if (access_token && this.decodeToken(access_token).exp * 1000 >
         Date.now()) {
             
             isAuthenticated = true

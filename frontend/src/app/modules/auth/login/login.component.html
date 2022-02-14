@@ -1,7 +1,10 @@
 <div class="login-background" fxLayout="row" fxLayoutAlign="center center">
   <mat-card class="login-content" fxLayout="column" fxLayoutAlign="start center">
     <div class="login-header">
-      <img src="assets/images/CS_Logo_Claim_RGB_plz_replace.png" alt="CSEye">
+      <span class="ant-pro-form-login-logo">
+        <img alt="logo" src="https://ng.ant.design/assets/img/logo.svg">
+      </span>
+      <span class="ant-pro-form-login-title">Ant Design</span>
     </div>
     <div class="login-form">
       <form [formGroup]="loginFormData" novalidate (submit)="login($event)" (keydown.enter)="login($event)" >
@@ -11,7 +14,7 @@
               [errorStateMatcher]="parentErrorStateMatcher" required>
             <button mat-button *ngIf="!loginFormData.get('username')?.hasError('required')" matSuffix mat-icon-button
               aria-label="Clear" tabindex="-1" (click)="clearField('username'); clearField('password');">
-              <mat-icon>close</mat-icon>
+              <i class="close-button" nz-icon nzType="close" nzTheme="outline"></i>
             </button>
             <mat-error *ngIf="loginFormData.get('username')?.hasError('required')">The username is
               <strong>required</strong>. </mat-error>
@@ -24,7 +27,7 @@
               [type]="hidePassword ? 'password' : 'text'" [errorStateMatcher]="parentErrorStateMatcher" required>
             <button mat-button *ngIf="!loginFormData.get('password')?.hasError('required')" matSuffix mat-icon-button
               aria-label="Clear" (click)="clearField('password');">
-              <mat-icon>close</mat-icon>
+              <i class="close-button" nz-icon nzType="close" nzTheme="outline"></i>
             </button>
             <mat-error *ngIf="loginFormData.get('password')?.hasError('required')">The password is
               <strong>required</strong>. </mat-error>
@@ -32,14 +35,9 @@
           </mat-form-field>
         </div>
 
-        <button mat-raised-button (click)="login($event)" color="primary" style="margin-bottom:20px" >
+        <button mat-raised-button (click)="login($event)" class="login-button" style="margin-bottom:20px" >
           Login
         </button>
-        <br>
-        <hr>
-        <div class="browser-option">
-            <span>Chrome is preferred</span>
-        </div>
       </form>
     </div>
   </mat-card>
