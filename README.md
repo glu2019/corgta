@@ -6,7 +6,7 @@ This repository is to develop Corgta web application.
 
 1. Cloning this repository using git.
    ```bash
-   git clone YOUR-BITBUCKET-URL
+   git clone https://github.com/glu2019/corgta.git
    ```
 
 ## Run the dev environment with Docker.
